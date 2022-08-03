@@ -1,4 +1,4 @@
 # refcards
 Simple refcards engine
 
-https://arussoft.github.io/refcards/
+https://alexarus.github.io/refcards-dashboard/
