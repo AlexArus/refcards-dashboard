@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Refcards</title>
   <style>
-
     :root {
       --base-font-size: 14px;
 
@@ -15,7 +15,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
 
       /* background-color: var(--background-color); */
@@ -27,7 +28,8 @@
       grid: 30px auto 30px / auto;
     }
 
-    header, footer {
+    header,
+    footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -62,17 +64,17 @@
 
       scroll-snap-align: center;
     }
-
   </style>
 </head>
 <!-- <body class="theme-light"> -->
+
 <body class="theme-dark">
 
   <header>
     <p>Favorites</p>
     <p>DateTime</p>
   </header>
-  
+
   <main id="board"></main>
 
   <footer>
@@ -86,11 +88,130 @@
     <h2>Settings</h2>
   </template>
 
+  <template data-name="GRASP">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .container {
+        display: grid;
+
+        grid:
+          "header header" 25px
+          "controller creator"
+          "indirection information_expert"
+          "low_coupling high_cohesion"
+          "polymorphism protected_variations"
+          "pure_fabrication pure_fabrication"
+        ;
+
+        place-items: stretch;
+
+        gap: 15px;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 8px;
+      }
+
+      .header {
+        grid-area: header;
+        place-self: center;
+        padding: 10px;
+      }
+
+      .controller {
+        grid-area: controller;
+      }
+
+      .indirection {
+        grid-area: indirection; 
+      }
+
+      .information_expert {
+        grid-area: information_expert;
+      }
+
+      .low_coupling{
+        grid-area: low_coupling;
+      }
+
+      .high_cohesion{
+        grid-area: high_cohesion;
+      }
+
+      .polymorphism{
+        grid-area: polymorphism;
+      }
+
+      .protected_variations{
+        grid-area: protected_variations;
+      }
+
+      .pure_fabrication{
+        grid-area: pure_fabrication;
+      }
+
+      .card {
+        border: 1px solid silver;
+        border-radius: 3px;
+        padding: 10px;
+      }
+    </style>
+    <main class="container">
+      <header class="header">
+        GRASP - general responsibility software patterns
+      </header>
+
+
+      <article class="controller card">
+        Controller
+      </article>
+
+      <article class="creator card">
+        Creator
+      </article>
+
+      <article class="indirection card">
+        indirection
+      </article>
+
+
+      <article class="information_expert card">
+        information expert
+      </article>
+
+      <article class="low_coupling card">
+        low coupling
+      </article>
+
+      <article class="high_cohesion card">
+        high cohesion
+      </article>
+
+      <article class="polymorphism card">
+        polymorphism
+      </article>
+
+      <article class="protected_variations card">
+        protected variations
+      </article>
+
+      <article class="pure_fabrication card">
+        pure fabrication
+      </article>
+
+    </main>
+  </template>
+
   <template data-name="n1">
     <style>
       h1 {
         color: red;
       }
+
       /* :host {
         background-color: var(--background-color);
       } */
@@ -119,15 +240,6 @@
     </style>
     <h1>R3</h1>
   </template>
-
-  <template data-name="n4">
-    <style>
-      h1 {
-        color: yellow;
-      }
-    </style>
-    <h1>R4</h1>
-  </template>
 </body>
 
 <script>
@@ -138,17 +250,17 @@
   const cards = []
   // let current = 0
 
-  Array.from(templates).forEach(template=> {
-    if(template.dataset['type'] === 'system') return;
+  Array.from(templates).forEach(template => {
+    if (template.dataset['type'] === 'system') return;
 
     const container = document.createElement('div')
     container.classList.add('refCardContainer')
-    const shadowRoot = container.attachShadow({mode: 'open'})
+    const shadowRoot = container.attachShadow({ mode: 'open' })
     shadowRoot.appendChild(template.content)
     // shadowRoot.appendChild(template.cloneNode(true).content)
     board.appendChild(container)
 
-    cards.push({container, name: template.dataset['name']})
+    cards.push({ container, name: template.dataset['name'] })
   })
 
   const getCurrentCard = () => {
@@ -165,7 +277,7 @@
   const btnNext = document.getElementById('btnNext')
   btnNext.addEventListener('click', () => {
     const { index } = getCurrentCard()
-    if(index < cards.length - 1) {
+    if (index < cards.length - 1) {
       cards[index + 1].container.scrollIntoView()
     }
   })
@@ -173,7 +285,7 @@
   const btnPrev = document.getElementById('btnPrev')
   btnPrev.addEventListener('click', () => {
     const { index } = getCurrentCard()
-    if(index > 0) {
+    if (index > 0) {
       cards[index - 1].container.scrollIntoView()
     }
   })
